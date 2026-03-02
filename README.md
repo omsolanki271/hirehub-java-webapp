@@ -3,9 +3,8 @@
 HireHub is a web-based Job Portal system developed using Java Servlet, JSP, Maven, and MySQL.
 The system allows employers to post jobs and candidates to search and apply for jobs online.
 
-========================================
-🚀 FEATURES
-========================================
+
+# 🚀 FEATURES
 
 👤 CANDIDATE MODULE
 - User Registration & Login
@@ -13,20 +12,18 @@ The system allows employers to post jobs and candidates to search and apply for 
 - Apply for Jobs
 - Update Profile
 
-🏢 EMPLOYER MODULE
+# 🏢 EMPLOYER MODULE
 - Employer Registration & Login
 - Post New Jobs
 - View Applications
 - Manage Job Listings
 
-🛠 ADMIN MODULE
+# 🛠 ADMIN MODULE
 - Manage Users
 - Manage Employers
 - Monitor Job Posts
 
-========================================
-🧰 TECHNOLOGIES USED
-========================================
+# 🧰 TECHNOLOGIES USED
 
 - Java (Servlet & JSP)
 - Maven
