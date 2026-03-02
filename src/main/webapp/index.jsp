@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-_
 <%@include file="all_component/all_css.jsp" %>
 </head>
 <body>
-	<h1>Hello my Maven project</h1>
+<%@include file="all_component/navbar.jsp" %>
+	<h1 class="text-center mt-4">Welcome to HireHub</h1>
 </body>
 </html>
