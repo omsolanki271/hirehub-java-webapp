@@ -1,33 +1,53 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">Navbar</a>
+<nav
+	class="navbar navbar-expand-lg navbar-dark bg-custom shadow-sm fixed-top">
+
+	<!-- Logo -->
+	<a class="navbar-brand d-flex align-items-center" href="index.jsp">
+		<img src="<%=request.getContextPath()%>/img/Hire Hub.jpeg" width="35"
+		height="35" class="rounded-circle mr-2" alt="HireHub Logo"> <span
+		class="font-weight-bold">HireHub</span>
+	</a>
+
+	<!-- Toggle Button -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarSupportedContent"
-		aria-controls="navbarSupportedContent" aria-expanded="false"
-		aria-label="Toggle navigation">
+		data-target="#navbarSupportedContent">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
+	<!-- Navbar Content -->
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+		<!-- Left Menu -->
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="#">Home
-					<span class="sr-only">(current)</span>
+
+			<li class="nav-item active md-2"><a class="nav-link" href="index.jsp">
+					<i class="fa-solid fa-house "></i> Home
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" role="button"
-				data-toggle="dropdown" aria-expanded="false"> Dropdown </a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Action</a> <a
-						class="dropdown-item" href="#">Another action</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
-				</div></li>
-			<li class="nav-item"><a class="nav-link disabled">Disabled</a></li>
+
+			<li class="nav-item ml-2"><a class="nav-link" href="add_job.jsp">
+					<i class="fa-solid fa-briefcase"></i> Post Job
+			</a></li>
+
+			<li class="nav-item ml-2"><a class="nav-link" href="view_job.jsp">
+					<i class="fa-solid fa-eye"></i> View Jobs
+			</a></li>
+
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+		<!-- Search Form -->
+		<form class="form-inline my-2 my-lg-0 mr-3">
+			<input class="form-control mr-2" type="search"
+				placeholder="Search jobs..." aria-label="Search">
+
+			<button class="btn btn-outline-light" type="submit">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
 		</form>
+
+		<!-- Right Buttons -->
+		<a href="login.jsp" class="btn btn-outline-light mr-2"> <i class="bi bi-box-arrow-in-right mr-2 p-1"></i>Login </a> <a
+			href="signup.jsp" class="btn btn-light font-weight-bold"> Sign Up
+		</a>
+
 	</div>
 </nav>
