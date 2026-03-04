@@ -28,7 +28,7 @@
 					<i class="fa-solid fa-briefcase"></i> Post Job
 			</a></li>
 
-			<li class="nav-item ml-2"><a class="nav-link" href="view_job.jsp">
+			<li class="nav-item ml-2"><a class="nav-link" href="view_jobs.jsp">
 					<i class="fa-solid fa-eye"></i> View Jobs
 			</a></li>
 
