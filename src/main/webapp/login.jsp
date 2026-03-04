@@ -20,12 +20,12 @@
             
             <div class="form-group">
                 <label>Email address</label>
-                <input type="email" class="form-control" placeholder="Enter email" required>
+                <input type="email" class="form-control" placeholder="Enter email" name="email" required>
             </div>
             
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Enter password" required>
+                <input type="password" class="form-control" placeholder="Enter password" name="password" required>
             </div>
             
             <button type="submit" class="btn btn-primary btn-block">
