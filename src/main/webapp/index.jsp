@@ -1,3 +1,7 @@
+
+<%@ page import="com.DB.DBConnect"%>
+<%@ page import="java.sql.Connection"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,6 +25,7 @@
 </head>
 <body>
 	<%@include file="all_component/navbar.jsp"%>
+
 	<div class="container-fluid back-img">
 		<div class="text-center">
 			<h1 class="text-white p3-4">
@@ -28,6 +33,10 @@
 			</h1>
 		</div>
 	</div>
+	<%
+	Connection conn = DBConnect.getConn();
+	out.println(conn);
+	%>
 	<%@include file="all_component/footer.jsp"%>
 </body>
 

@@ -1,5 +1,7 @@
+<%@ page import="com.entity.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+
 <nav
 	class="navbar navbar-expand-lg navbar-dark bg-custom shadow-sm fixed-top">
 
@@ -26,7 +28,8 @@
 				href="index.jsp"> <i class="fa-solid fa-house "></i> Home
 			</a></li>
 
-			<c:if test="${not empty userobj and userobj.role == 'admin'}">
+			<!-- Use with JSTL -->
+			<%-- <c:if test="${not empty userobj and userobj.role == 'admin'}">
 				<li class="nav-item ml-2"><a class="nav-link"
 					href="add_job.jsp"> <i class="fa-solid fa-briefcase"></i> Post
 						Job
@@ -35,8 +38,22 @@
 				<li class="nav-item ml-2"><a class="nav-link"
 					href="view_jobs.jsp"> <i class="fa-solid fa-eye"></i> View Jobs
 				</a></li>
-			</c:if>
+			</c:if> --%>
+			<%
+			User user = (User) session.getAttribute("userobj");
+			if (user != null && "admin".equals(user.getRole())) 
+			{
+			%>
+			<li class="nav-item ml-2"><a class="nav-link" href="add_job.jsp">
+					<i class="fa-solid fa-briefcase"></i> Post Job
+			</a></li>
 
+			<li class="nav-item ml-2"><a class="nav-link"
+				href="view_jobs.jsp"> <i class="fa-solid fa-eye"></i> View Jobs
+			</a></li>
+			<%
+			}
+			%>
 
 		</ul>
 
