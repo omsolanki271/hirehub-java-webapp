@@ -62,11 +62,11 @@ textarea{
                     <label>Location</label>
                     <select name="location" class="custom-select" required>
                         <option value="">Choose...</option>
-                        <option>Ahmedabad</option>
-                        <option>Surat</option>
-                        <option>Rajkot</option>
-                        <option>Vadodara</option>
-                        <option>Remote</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Surat">Surat</option>
+                        <option value="Rajkot">Rajkot</option>
+                        <option value="Vadodara">Vadodara</option>
+                        <option value="Remote">Remote</option>
                     </select>
                 </div>
 
@@ -74,22 +74,21 @@ textarea{
                     <label>Category</label>
                     <select name="category" class="custom-select" required>
                         <option value="">Choose...</option>
-                        <option>IT</option>
-                        <option>Banking</option>
-                        <option>Marketing</option>
-                        <option>HR</option>
-                        <option>Sales</option>
+                        <option value="IT">IT</option>
+                        <option value="Banking">Banking</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="HR">HR</option>
+                        <option value="Sales">Sales</option>
                     </select>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Status</label>
                     <select name="status" class="custom-select">
-                        <option>Active</option>
-                        <option>Inactive</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
                     </select>
                 </div>
-
             </div>
 
             <!-- Description -->
