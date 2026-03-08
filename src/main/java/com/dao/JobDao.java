@@ -20,13 +20,14 @@ public class JobDao {
 		
 		try
 		{
-			String sql = "insert inot jobs(title,description,category,status,location) values(?,?,?,?,?)";
+			String sql = "insert into jobs(title,description,category,status,location) values(?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, j.getTitle());
 			ps.setString(2, j.getDescription());
-			ps.setString(3, j.getStatus());
-			ps.setString(4, j.getLocation());
+			ps.setString(3, j.getCategory());
+			ps.setString(4, j.getStatus());
+			ps.setString(5, j.getLocation());
 			
 			int i = ps.executeUpdate();
 			
