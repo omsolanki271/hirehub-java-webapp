@@ -1,3 +1,7 @@
+<%@page import="com.entity.Jobs"%>
+<%@page import="java.util.List"%>
+<%@page import="com.DB.DBConnect"%>
+<%@page import="com.dao.JobDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,6 +33,16 @@ body{
 
             <h5 class="text-center text-primary">All Jobs</h5>
 
+			<%
+			JobDao dao = new JobDao(DBConnect.getConn());
+			List<Jobs> list = dao.getAlljobs();
+			for(Jobs j:list)
+			{
+			
+			%>
+			
+			
+			
             <!-- Job Card -->
             <div class="card mt-3 job-card">
                 <div class="card-body">
@@ -37,10 +51,6 @@ body{
                         <i class="fa fa-clipboard fa-2x"></i>
                     </div>
 
-                    <h6>Software Engineer 2.5 years Experience</h6>
-
-                    <p>Software engineer Software engineer</p>
-
                     <br>
 
                     <div class="form-row">
@@ -48,27 +58,27 @@ body{
                         <div class="form-group col-md-3">
                             <input type="text"
                                    class="form-control form-control-sm"
-                                   value="Location: Chennai"
+                                   value="<%=j.getLocation() %>"
                                    readonly>
                         </div>
 
                         <div class="form-group col-md-3">
                             <input type="text"
                                    class="form-control form-control-sm"
-                                   value="Category: IT"
+                                   value="<%=j.getCategory() %>"
                                    readonly>
                         </div>
 
                         <div class="form-group col-md-3">
                             <input type="text"
                                    class="form-control form-control-sm"
-                                   value="Status: Active"
+                                   value="<%=j.getStatus() %>"
                                    readonly>
                         </div>
 
                     </div>
 
-                    <h6>Publish Date: 2021-07-02 10:18:18</h6>
+                    <h6>Publish Date: <%=j.getPdate() %></h6>
 
                     <div class="text-center mt-2">
                         <a href="#" class="btn btn-sm btn-success text-white">Edit</a>
@@ -78,7 +88,9 @@ body{
                 </div>
             </div>
 
-            
+            <%	
+			}
+			%>
         </div>
     </div>
 

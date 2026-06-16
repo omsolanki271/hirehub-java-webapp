@@ -61,12 +61,14 @@ public class JobDao {
 			while(rs.next())
 			{
 				j = new Jobs();
-				j.setId(rs.getInt(1));
-				j.setTitle(rs.getString(2));
-				j.setDescription(rs.getString(3));
-				j.setCategory(rs.getString(4));
-				j.setLocation(rs.getString(5));
-				j.setPdate(rs.getString(6));
+				
+				j.setId(rs.getInt("id"));
+				j.setTitle(rs.getString("title"));
+				j.setDescription(rs.getString("description"));
+				j.setCategory(rs.getString("category"));
+				j.setStatus(rs.getString("status"));
+				j.setLocation(rs.getString("location"));
+				j.setPdate(rs.getString("pdate"));
 				list.add(j);
 			}
 			
