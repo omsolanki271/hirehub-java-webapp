@@ -20,28 +20,42 @@ body{
 }
 
 .job-card{
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    border:none;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.job-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
 
 .job-title{
-    font-size:20px;
-    font-weight:bold;
+    font-size:24px;
+    font-weight:600;
+    color:#0d6efd;
 }
 
 .job-desc{
     color:#555;
+    font-size:15px;
 }
 
-.info-box{
-    background:#f8f9fa;
-    padding:8px;
-    border-radius:5px;
-    text-align:center;
+.badge-box{
+    font-size:14px;
+    padding:8px 12px;
+    border-radius:20px;
+    margin-right:10px;
 }
 
-.btn{
-    min-width:80px;
+.publish-date{
+    color:#6c757d;
+    font-size:14px;
+}
+
+.btn-action{
+    width:100px;
 }
 </style>
 
@@ -60,69 +74,69 @@ List<Jobs> list = dao.getAlljobs();
 
 for(Jobs j : list)
 {
-%>
-
-<div class="card mt-3 job-card">
+%><div class="card mt-4 job-card">
     <div class="card-body">
 
-        <div class="text-center text-primary">
-            <i class="fa fa-clipboard fa-2x"></i>
+        <div class="text-center mb-3">
+            <i class="fa fa-briefcase fa-2x text-primary"></i>
         </div>
 
-        <h4 class="text-center mt-3 job-title">
-            <%= j.getTitle() %>
-        </h4>
+        <h3 class="text-center job-title">
+            <%=j.getTitle()%>
+        </h3>
 
         <p class="text-center job-desc">
-            <%= j.getDescription() %>
+            <%=j.getDescription()%>
         </p>
 
-        <div class="row mt-3">
-
-            <div class="col-md-4">
-                <div class="info-box">
-                    <b>Category</b><br>
-                    <%= j.getCategory() %>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="info-box">
-                    <b>Status</b><br>
-                    <%= j.getStatus() %>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="info-box">
-                    <b>Location</b><br>
-                    <%= j.getLocation() %>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="mt-3">
-            <b>Publish Date:</b> <%= j.getPdate() %>
-        </div>
-
         <div class="text-center mt-3">
-            <a href="edit_job.jsp?id=<%=j.getId()%>"
-               class="btn btn-sm btn-success">
-               Edit
-            </a>
 
-            <a href="delete?id=<%=j.getId()%>"
-               class="btn btn-sm btn-danger"
-               onclick="return confirm('Are you sure?')">
-               Delete
-            </a>
+            <span class="badge badge-primary badge-box">
+                <i class="fa fa-layer-group"></i>
+                <%=j.getCategory()%>
+            </span>
+
+            <span class="badge badge-success badge-box">
+                <i class="fa fa-check-circle"></i>
+                <%=j.getStatus()%>
+            </span>
+
+            <span class="badge badge-warning badge-box">
+                <i class="fa fa-map-marker-alt"></i>
+                <%=j.getLocation()%>
+            </span>
+
+        </div>
+
+        <hr>
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <span class="publish-date">
+                <i class="fa fa-calendar"></i>
+                Published: <%=j.getPdate()%>
+            </span>
+
+            <div>
+
+                <a href="edit_job.jsp?id=<%=j.getId()%>"
+                   class="btn btn-success btn-sm btn-action">
+                    Edit
+                </a>
+
+                <a href="delete?id=<%=j.getId()%>"
+                   class="btn btn-danger btn-sm btn-action"
+                   onclick="return confirm('Are you sure?')">
+                    Delete
+                </a>
+
+            </div>
+
         </div>
 
     </div>
 </div>
-
-<%
+		<%
 }
 %>
 
