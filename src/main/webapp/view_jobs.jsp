@@ -3,8 +3,10 @@
 <%@page import="com.DB.DBConnect"%>
 <%@page import="com.dao.JobDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,8 +18,30 @@
 body{
     background-color:#f4f6f9;
 }
+
 .job-card{
     border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.job-title{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.job-desc{
+    color:#555;
+}
+
+.info-box{
+    background:#f8f9fa;
+    padding:8px;
+    border-radius:5px;
+    text-align:center;
+}
+
+.btn{
+    min-width:80px;
 }
 </style>
 
@@ -28,71 +52,79 @@ body{
 
 <div class="container mt-4">
 
-    <div class="row">
-        <div class="col-md-12">
+<h3 class="text-center text-primary mb-4">All Jobs</h3>
 
-            <h5 class="text-center text-primary">All Jobs</h5>
+<%
+JobDao dao = new JobDao(DBConnect.getConn());
+List<Jobs> list = dao.getAlljobs();
 
-			<%
-			JobDao dao = new JobDao(DBConnect.getConn());
-			List<Jobs> list = dao.getAlljobs();
-			for(Jobs j:list)
-			{
-			
-			%>
-			
-			
-			
-            <!-- Job Card -->
-            <div class="card mt-3 job-card">
-                <div class="card-body">
+for(Jobs j : list)
+{
+%>
 
-                    <div class="text-center text-primary">
-                        <i class="fa fa-clipboard fa-2x"></i>
-                    </div>
+<div class="card mt-3 job-card">
+    <div class="card-body">
 
-                    <br>
+        <div class="text-center text-primary">
+            <i class="fa fa-clipboard fa-2x"></i>
+        </div>
 
-                    <div class="form-row">
+        <h4 class="text-center mt-3 job-title">
+            <%= j.getTitle() %>
+        </h4>
 
-                        <div class="form-group col-md-3">
-                            <input type="text"
-                                   class="form-control form-control-sm"
-                                   value="<%=j.getLocation() %>"
-                                   readonly>
-                        </div>
+        <p class="text-center job-desc">
+            <%= j.getDescription() %>
+        </p>
 
-                        <div class="form-group col-md-3">
-                            <input type="text"
-                                   class="form-control form-control-sm"
-                                   value="<%=j.getCategory() %>"
-                                   readonly>
-                        </div>
+        <div class="row mt-3">
 
-                        <div class="form-group col-md-3">
-                            <input type="text"
-                                   class="form-control form-control-sm"
-                                   value="<%=j.getStatus() %>"
-                                   readonly>
-                        </div>
-
-                    </div>
-
-                    <h6>Publish Date: <%=j.getPdate() %></h6>
-
-                    <div class="text-center mt-2">
-                        <a href="#" class="btn btn-sm btn-success text-white">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger text-white">Delete</a>
-                    </div>
-
+            <div class="col-md-4">
+                <div class="info-box">
+                    <b>Category</b><br>
+                    <%= j.getCategory() %>
                 </div>
             </div>
 
-            <%	
-			}
-			%>
+            <div class="col-md-4">
+                <div class="info-box">
+                    <b>Status</b><br>
+                    <%= j.getStatus() %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="info-box">
+                    <b>Location</b><br>
+                    <%= j.getLocation() %>
+                </div>
+            </div>
+
         </div>
+
+        <div class="mt-3">
+            <b>Publish Date:</b> <%= j.getPdate() %>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="edit_job.jsp?id=<%=j.getId()%>"
+               class="btn btn-sm btn-success">
+               Edit
+            </a>
+
+            <a href="delete?id=<%=j.getId()%>"
+               class="btn btn-sm btn-danger"
+               onclick="return confirm('Are you sure?')">
+               Delete
+            </a>
+        </div>
+
     </div>
+</div>
+
+<%
+}
+%>
 
 </div>
 
