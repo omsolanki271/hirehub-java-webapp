@@ -4,7 +4,8 @@
 <%@page import="com.dao.JobDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 
 <html>
@@ -66,93 +67,83 @@ body {
 
 	<div class="container mt-4">
 
-    <h3 class="text-center text-primary mb-4">All Jobs</h3>
+		<h3 class="text-center text-primary mb-4">All Jobs</h3>
+		<c:if test="${not empty sucMsg}">
+			<div class="alert alert-success" role="alert">${sucMsg}</div>
+			<c:remove var="sucMsg" />
+		</c:if>
+		<div class="row">
 
-    <div class="row">
+			<%
+			JobDao dao = new JobDao(DBConnect.getConn());
+			List<Jobs> list = dao.getAlljobs();
 
-    <%
-    JobDao dao = new JobDao(DBConnect.getConn());
-    List<Jobs> list = dao.getAlljobs();
+			for (Jobs j : list) {
+			%>
 
-    for (Jobs j : list)
-    {
-    %>
+			<div class="col-md-6 mb-4">
 
-    <div class="col-md-6 mb-4">
+				<div class="card job-card h-100">
 
-        <div class="card job-card h-100">
+					<div class="card-body">
 
-            <div class="card-body">
+						<div class="text-center mb-3">
+							<i class="fa fa-briefcase fa-2x text-primary"></i>
+						</div>
 
-                <div class="text-center mb-3">
-                    <i class="fa fa-briefcase fa-2x text-primary"></i>
-                </div>
+						<h3 class="text-center job-title">
+							<%=j.getTitle()%>
+						</h3>
 
-                <h3 class="text-center job-title">
-                    <%=j.getTitle()%>
-                </h3>
+						<p class="text-center job-desc">
+							<%=j.getDescription()%>
+						</p>
 
-                <p class="text-center job-desc">
-                    <%=j.getDescription()%>
-                </p>
+						<div class="text-center mt-3">
 
-                <div class="text-center mt-3">
+							<span class="badge badge-primary badge-box"> <i
+								class="fa fa-layer-group"></i> <%=j.getCategory()%>
+							</span> <span class="badge badge-success badge-box"> <i
+								class="fa fa-check-circle"></i> <%=j.getStatus()%>
+							</span> <span class="badge badge-warning badge-box"> <i
+								class="fa fa-map-marker-alt"></i> <%=j.getLocation()%>
+							</span>
 
-                    <span class="badge badge-primary badge-box">
-                        <i class="fa fa-layer-group"></i>
-                        <%=j.getCategory()%>
-                    </span>
+						</div>
 
-                    <span class="badge badge-success badge-box">
-                        <i class="fa fa-check-circle"></i>
-                        <%=j.getStatus()%>
-                    </span>
+						<hr>
 
-                    <span class="badge badge-warning badge-box">
-                        <i class="fa fa-map-marker-alt"></i>
-                        <%=j.getLocation()%>
-                    </span>
+						<div class="d-flex justify-content-between align-items-center">
 
-                </div>
+							<span class="publish-date"> <i class="fa fa-calendar"></i>
+								Published: <%=j.getPdate()%>
+							</span>
 
-                <hr>
+							<div>
 
-                <div class="d-flex justify-content-between align-items-center">
+								<a href="edit_job.jsp?id=<%=j.getId()%>"
+									class="btn btn-success btn-sm btn-action"> Edit </a>
+		
+								<a href="delete?id=<%=j.getId()%>"
+									class="btn btn-danger btn-sm btn-action"
+									onclick="return confirm('Are you sure?')"> Delete </a>
 
-                    <span class="publish-date">
-                        <i class="fa fa-calendar"></i>
-                        Published: <%=j.getPdate()%>
-                    </span>
+							</div>
 
-                    <div>
+						</div>
 
-                        <a href="edit_job.jsp?id=<%=j.getId()%>"
-                           class="btn btn-success btn-sm btn-action">
-                            Edit
-                        </a>
+					</div>
 
-                        <a href="delete?id=<%=j.getId()%>"
-                           class="btn btn-danger btn-sm btn-action"
-                           onclick="return confirm('Are you sure?')">
-                            Delete
-                        </a>
+				</div>
 
-                    </div>
+			</div>
 
-                </div>
+			<%
+			}
+			%>
 
-            </div>
+		</div>
 
-        </div>
-
-    </div>
-
-    <%
-    }
-    %>
-
-    </div>
-
-</div>
+	</div>
 </body>
 </html>

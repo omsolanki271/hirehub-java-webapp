@@ -39,17 +39,18 @@ public class Updatejob extends HttpServlet {
 		j.setStatus(status);
 		j.setDescription(dest);
 		
+		HttpSession session = request.getSession(false);
 		
 		JobDao dao = new JobDao(DBConnect.getConn());
 		boolean jobs = dao.getUpdate(j);
 		if(jobs)
 		{
-			request.setAttribute("sucMsg", "Job Post update sucessfully..");
+			session.setAttribute("sucMsg", "Job Post update sucessfully..");
 			response.sendRedirect("view_jobs.jsp");
 		}
 		else
 		{
-			request.setAttribute("sucMsg", "Something Wrong on server..");
+			session.setAttribute("sucMsg", "Something Wrong on server..");
 			response.sendRedirect("view_jobs.jsp");
 		}
 		

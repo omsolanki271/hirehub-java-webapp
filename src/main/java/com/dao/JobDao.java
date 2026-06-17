@@ -136,5 +136,27 @@ public class JobDao {
 
 	    return f;
 	}
+	
+	public boolean getdel(int id)
+	{
+		boolean f = false;
+		
+		try {
+			String sql = "delete from jobs where id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			int update = ps.executeUpdate();
+			
+			if(update > 0 )
+			{
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return f;
+	}
 }
 
