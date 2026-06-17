@@ -17,18 +17,8 @@
 	  	<description></description>
 	  	<servlet-class>com.servlet.AddPostServlet</servlet-class>
 	  </servlet>
-	  <servlet>
-	  	<servlet-name>updatejob</servlet-name>
-	  	<display-name>updatejob</display-name>
-	  	<description></description>
-	  	<servlet-class>com.servlet.updatejob</servlet-class>
-	  </servlet>
-	  <servlet>
-	  	<servlet-name>Updatejob</servlet-name>
-	  	<display-name>Updatejob</display-name>
-	  	<description></description>
-	  	<servlet-class>com.servlet.Updatejob</servlet-class>
-	  </servlet>
+	  
+	 
 	  <servlet-mapping>
 	  	<servlet-name>LoginServlet</servlet-name>
 	  	<url-pattern>/LoginServlet</url-pattern>
@@ -37,12 +27,5 @@
 	  	<servlet-name>AddPostServlet</servlet-name>
 	  	<url-pattern>/AddPostServlet</url-pattern>
 	  </servlet-mapping>
-	  <servlet-mapping>
-	  	<servlet-name>updatejob</servlet-name>
-	  	<url-pattern>/updatejob</url-pattern>
-	  </servlet-mapping>
-	  <servlet-mapping>
-	  	<servlet-name>Updatejob</servlet-name>
-	  	<url-pattern>/Updatejob</url-pattern>
-	  </servlet-mapping>
+	  
 </web-app>

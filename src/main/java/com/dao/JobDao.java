@@ -111,7 +111,7 @@ public class JobDao {
 	    boolean f = false;
 
 	    try {
-
+	    		
 	        String sql = "update jobs set title=?, description=?, category=?, status=?, location=? where id=?";
 
 	        PreparedStatement ps = conn.prepareStatement(sql);
