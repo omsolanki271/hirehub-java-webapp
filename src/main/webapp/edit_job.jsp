@@ -47,7 +47,7 @@ textarea {
 
 			<c:if test="${not empty sucMsg}">
 				<div class="alert alert-success" role="alert">${sucMsg}</div>
-				<c:remove var="sucMsg"/>
+				<c:remove var="sucMsg" />
 			</c:if>
 
 			<!-- Header -->
@@ -57,30 +57,28 @@ textarea {
 			</div>
 
 
-<%
-
-int id = Integer.parseInt(request.getParameter("id"));
-JobDao dao = new JobDao(DBConnect.getConn());
-Jobs j =  dao.getEditbyId(id);
-%>
+			<%
+			int id = Integer.parseInt(request.getParameter("id"));
+			JobDao dao = new JobDao(DBConnect.getConn());
+			Jobs j = dao.getEditbyId(id);
+			%>
 
 			<!-- Form -->
-			<form action="UpdatePostServlet" method="post">
+			<form action="Updatejob" method="post">
 				<input type="hidden" name="id" value="<%=j.getId()%>">
 				<!-- Job Title -->
 				<div class="form-group">
-					<label>Enter Title</label> 
-					<input type="text" name="title" class="form-control" value="<%=j.getTitle() %>" required>
+					<label>Enter Title</label> <input type="text" name="title"
+						class="form-control" value="<%=j.getTitle()%>" required>
 				</div>
 
 				<!-- Row for dropdowns -->
 				<div class="form-row">
 
 					<div class="form-group col-md-4">
-						<label>Location</label> 
-						<select name="location"
+						<label>Location</label> <select name="location"
 							class="custom-select" required>
-							<option value="<%=j.getLocation() %>"><%=j.getLocation() %></option>
+							<option value="<%=j.getLocation()%>"><%=j.getLocation()%></option>
 							<option value="Ahmedabad">Ahmedabad</option>
 							<option value="Surat">Surat</option>
 							<option value="Rajkot">Rajkot</option>
@@ -90,10 +88,9 @@ Jobs j =  dao.getEditbyId(id);
 					</div>
 
 					<div class="form-group col-md-4">
-						<label>Category</label> 
-						<select name="category"
+						<label>Category</label> <select name="category"
 							class="custom-select" required>
-							<option value ="<%=j.getCategory() %>"><%=j.getCategory() %></option>
+							<option value="<%=j.getCategory()%>"><%=j.getCategory()%></option>
 							<option value="IT">IT</option>
 							<option value="Banking">Banking</option>
 							<option value="Marketing">Marketing</option>
@@ -103,10 +100,9 @@ Jobs j =  dao.getEditbyId(id);
 					</div>
 
 					<div class="form-group col-md-4">
-						<label>Status</label> 
-						<select name="status" class="custom-select">
-					
-							<option value="<%=j.getStatus() %>"><%=j.getStatus() %></option>
+						<label>Status</label> <select name="status" class="custom-select">
+
+							<option value="<%=j.getStatus()%>"><%=j.getStatus()%></option>
 							<option value="Active">Active</option>
 							<option value="Inactive">Inactive</option>
 						</select>
@@ -116,13 +112,13 @@ Jobs j =  dao.getEditbyId(id);
 				<!-- Description -->
 				<div class="form-group">
 					<label>Enter Description</label>
-					<textarea name="description" class="form-control" rows="5" required><%=j.getDescription() %></textarea>
+					<textarea name="description" class="form-control" rows="5" required><%=j.getDescription()%></textarea>
 				</div>
 
 				<!-- Button -->
 				<div class="text-left">
-					<button type="submit" class="btn btn-success px-4">
-						Update Job</button>
+					<button type="submit" class="btn btn-success px-4">Update
+						Job</button>
 				</div>
 
 			</form>

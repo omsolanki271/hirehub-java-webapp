@@ -105,5 +105,36 @@ public class JobDao {
 		}
 		return j;
 	}
+	
+	public boolean getUpdate(Jobs j)
+	{
+	    boolean f = false;
+
+	    try {
+
+	        String sql = "update jobs set title=?, description=?, category=?, status=?, location=? where id=?";
+
+	        PreparedStatement ps = conn.prepareStatement(sql);
+
+	        ps.setString(1, j.getTitle());
+	        ps.setString(2, j.getDescription());
+	        ps.setString(3, j.getCategory());
+	        ps.setString(4, j.getStatus());
+	        ps.setString(5, j.getLocation());
+	        ps.setInt(6, j.getId());
+
+	        int i = ps.executeUpdate();
+
+	        if(i > 0)
+	        {
+	            f = true;
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return f;
+	}
 }
 
