@@ -3,6 +3,8 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.entity.User;
 
@@ -78,4 +80,39 @@ public class UserDao {
 
         return user;
     }
+    public List<User> getAllUsers()
+	{
+	    List<User> list = new ArrayList<User>();
+
+	    User u = null;
+
+	    try
+	    {
+	        String sql = "select * from users order by id desc";
+
+	        PreparedStatement ps =
+	                conn.prepareStatement(sql);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        while(rs.next())
+	        {
+	            u = new User();
+
+	            u.setId(rs.getInt("id"));
+	            u.setFullname(rs.getString("fullname"));
+	            u.setEmail(rs.getString("email"));
+	            u.setQualification(rs.getString("qualification"));
+
+	            list.add(u);
+	        }
+	    }
+	    catch(Exception e)
+	    {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
+
 }

@@ -8,160 +8,111 @@ Admin admin = (Admin) session.getAttribute("adminobj");
 User user = (User) session.getAttribute("userobj");
 %>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-custom shadow-sm fixed-top">
-
-	<a class="navbar-brand d-flex align-items-center"
-		href="<%=request.getContextPath()%>/index.jsp">
-
-		<img
-		src="<%=request.getContextPath()%>/img/Hire Hub.jpeg"
-		width="35" height="35"
-		class="rounded-circle mr-2">
-
-		<span class="font-weight-bold">HireHub</span>
-
-	</a>
-
-	<button class="navbar-toggler" type="button"
-		data-toggle="collapse"
-		data-target="#navbarSupportedContent">
-
-		<span class="navbar-toggler-icon"></span>
-
-	</button>
-
-	<div class="collapse navbar-collapse"
-		id="navbarSupportedContent">
-
-		<ul class="navbar-nav mr-auto">
-
-			<li class="nav-item">
-				<a class="nav-link"
-				href="../index.jsp">
-					<i class="fa-solid fa-house"></i> Home
-				</a>
-			</li>
-
-			<%
-			if(admin != null)
-			{
-			%>
-
-			<li class="nav-item">
-				<a class="nav-link"
-				href="<%=request.getContextPath()%>/admin/add_job.jsp">
-
-					<i class="fa-solid fa-briefcase"></i>
-					Post Job
-
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link"
-				href="<%=request.getContextPath()%>/admin/view_jobs.jsp">
-
-					<i class="fa-solid fa-eye"></i>
-					View Jobs
-
-				</a>
-			</li>
-
-			<%
-			}
-			%>
-
-			<%
-			if(user != null)
-			{
-			%>
-
-			<li class="nav-item">
-				<a class="nav-link"
-				href="<%=request.getContextPath()%>/user/user_home.jsp">
-
-					<i class="fa-solid fa-user"></i>
-					Dashboard
-
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link"
-				href="#">
-
-					<i class="fa-solid fa-briefcase"></i>
-					Jobs
-
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link"
-				href="#">
-
-					<i class="fa-solid fa-file"></i>
-					My Applications
-
-				</a>
-			</li>
-
-			<%
-			}
-			%>
-
-		</ul>
-
-		<form class="form-inline my-2 my-lg-0 mr-3">
-			<input class="form-control mr-2"
-				type="search"
-				placeholder="Search jobs...">
-
-			<button class="btn btn-outline-light"
-				type="submit">
-
-				<i class="fa-solid fa-magnifying-glass"></i>
-
-			</button>
-		</form>
-
-		<%
-		if(admin == null && user == null)
-		{
-		%>
-
-		<a href="<%=request.getContextPath()%>/login.jsp"
-			class="btn btn-outline-light mr-2">
-
-			Login
-
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">
+			<img src="<%=request.getContextPath()%>/img/Hire Hub.jpeg"
+				width="38" height="38" class="rounded-circle">
+			<span>HireHub</span>
 		</a>
 
-		<a href="<%=request.getContextPath()%>/signup.jsp"
-			class="btn btn-light font-weight-bold">
+		<button class="navbar-toggler border-0" type="button"
+			data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-			Sign Up
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">
+						<i class="fa-solid fa-house"></i> Home
+					</a>
+				</li>
 
-		</a>
+				<%
+				if (admin != null) {
+				%>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/admin/add_job.jsp">
+						<i class="fa-solid fa-plus-circle"></i> Post Job
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/admin/view_jobs.jsp">
+						<i class="fa-solid fa-list-check"></i> View Jobs
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/admin/view_users.jsp">
+						<i class="fa-solid fa-users-gear"></i> View Users
+					</a>
+				</li>
+				<%
+				}
+				%>
 
-		<%
-		}
-		else
-		{
-		%>
+				<%
+				if (user != null) {
+				%>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/user/user_home.jsp">
+						<i class="fa-solid fa-table-columns"></i> Dashboard
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<i class="fa-solid fa-briefcase"></i> Jobs
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<i class="fa-solid fa-file-invoice"></i> My Applications
+					</a>
+				</li>
+				<%
+				}
+				%>
+			</ul>
 
-		<a href="<%=request.getContextPath()%>/logout"
-			class="btn btn-danger">
+			<!-- Search Form -->
+			<form class="form-inline my-2 my-lg-0 mr-3 d-flex align-items-center">
+				<div class="input-group">
+					<input class="form-control nav-search-input" type="search" placeholder="Search jobs..." aria-label="Search">
+					<div class="input-group-append">
+						<button class="btn nav-search-btn" type="submit">
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+					</div>
+				</div>
+			</form>
 
-			Logout
-
-		</a>
-
-		<%
-		}
-		%>
-
+			<!-- Authentication Buttons -->
+			<div class="d-flex align-items-center gap-2">
+				<%
+				if (admin == null && user == null) {
+				%>
+				<a href="<%=request.getContextPath()%>/login.jsp" class="nav-link navbar-btn-login mr-2">
+					<i class="fa-solid fa-right-to-bracket"></i> Login
+				</a>
+				<a href="<%=request.getContextPath()%>/signup.jsp" class="nav-link navbar-btn-signup">
+					<i class="fa-solid fa-user-plus"></i> Sign Up
+				</a>
+				<%
+				} else {
+				%>
+				<span class="navbar-text mr-3 text-white-50 font-weight-bold d-none d-lg-inline">
+					<i class="fa-solid fa-circle-user mr-1 text-success"></i>
+					<%= (admin != null) ? "Admin Panel" : user.getFullname() %>
+				</span>
+				<a href="<%=request.getContextPath()%>/logout" class="btn btn-danger-gradient btn-action-sm">
+					<i class="fa-solid fa-power-off mr-1"></i> Logout
+				</a>
+				<%
+				}
+				%>
+			</div>
+		</div>
 	</div>
-
 </nav>
-
