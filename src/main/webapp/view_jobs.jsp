@@ -64,7 +64,9 @@ body {
 <body>
 
 	<%@ include file="all_component/navbar.jsp"%>
-
+<c:if test="${empty adminobj}">
+    <c:redirect url="login.jsp"/>
+</c:if>
 	<div class="container mt-4">
 
 		<h3 class="text-center text-primary mb-4">All Jobs</h3>

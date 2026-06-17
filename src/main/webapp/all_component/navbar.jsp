@@ -1,3 +1,4 @@
+<%@page import="com.entity.Admin"%>
 <%@ page import="com.entity.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
@@ -40,8 +41,8 @@
 				</a></li>
 			</c:if> --%>
 			<%
-			User user = (User) session.getAttribute("userobj");
-			if (user != null && "admin".equals(user.getRole())) 
+			Admin admin = (Admin) session.getAttribute("adminobj");
+			if (admin != null) 
 			{
 			%>
 			<li class="nav-item ml-2"><a class="nav-link" href="add_job.jsp">

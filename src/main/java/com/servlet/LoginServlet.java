@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.DB.DBConnect;
+import com.dao.AdminDao;
+import com.entity.Admin;
 import com.entity.User;
 
 @WebServlet("/loginServlet")
@@ -31,24 +34,27 @@ public class LoginServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("password");
 			
-			
-			if("admin@gmail.com".equals(email) && "123".equals(pw))
-			{
-			    User u = new User();
-			    u.setRole("admin");
+			AdminDao dao =
+			        new AdminDao(DBConnect.getConn());
 
+			Admin admin = dao.login(email, pw);
+
+			if(admin != null)
+			{
 			    HttpSession session = request.getSession();
-			    session.setAttribute("userobj", u);
+
+			    session.setAttribute("adminobj", admin);
 
 			    response.sendRedirect("admin.jsp");
 			}
 			else
 			{
-				response.sendRedirect("login.jsp");
+			    response.sendRedirect("login.jsp");
 			}
 			
 			/*
 			 * out.println(email); out.print(pw);
+			 *
 			 */
 		}
 		catch(Exception e)

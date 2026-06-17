@@ -26,6 +26,10 @@
 <body>
 	<%@include file="all_component/navbar.jsp"%>
 
+<c:if test="${empty adminobj}">
+    <c:redirect url="login.jsp"/>
+</c:if>
+
 	<div class="container-fluid back-img">
 		<div class="container-fluid back-img d-flex justify-content-center align-items-center ">
 			<h1 class="text-dark">Welcome Admin</h1>
