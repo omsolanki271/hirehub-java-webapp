@@ -78,4 +78,32 @@ public class JobDao {
 
 		return list;
 	}
+	
+	public Jobs getEditbyId(int id)
+	{
+		Jobs j = null;
+		try {
+			String sql = "select * from jobs where id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				
+				j = new Jobs();
+				j.setId(rs.getInt("id"));
+				j.setTitle(rs.getString("title"));
+				j.setDescription(rs.getString("description"));
+				j.setCategory(rs.getString("category"));
+				j.setStatus(rs.getString("status"));
+				j.setLocation(rs.getString("location"));
+				j.setPdate(rs.getString("pdate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return j;
+	}
 }
+
