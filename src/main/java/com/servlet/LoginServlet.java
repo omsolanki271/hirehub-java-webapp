@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.DB.DBConnect;
 import com.dao.AdminDao;
+import com.dao.UserDao;
 import com.entity.Admin;
 import com.entity.User;
 
@@ -20,45 +21,51 @@ import com.entity.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {
-        super();
+	public LoginServlet() {
+		super();
 
-    }
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 //		response.setContentType("text/html");
 //		PrintWriter out = response.getWriter();
-		
-		try
-		{
+
+		try {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("password");
-			
-			AdminDao dao =
-			        new AdminDao(DBConnect.getConn());
+
+			AdminDao dao = new AdminDao(DBConnect.getConn());
 
 			Admin admin = dao.login(email, pw);
 
-			if(admin != null)
+			HttpSession session = request.getSession();
+			if (admin != null) 
 			{
-			    HttpSession session = request.getSession();
+				session.setAttribute("adminobj", admin);
 
-			    session.setAttribute("adminobj", admin);
-
-			    response.sendRedirect("admin.jsp");
-			}
-			else
+				response.sendRedirect("admin/admin.jsp");
+			} 
+			else 
 			{
-			    response.sendRedirect("login.jsp");
+				UserDao userDao = new UserDao(DBConnect.getConn());
+
+				User user = userDao.login(email, pw);
+				if (user != null) {
+					session.setAttribute("userobj", user);
+					response.sendRedirect("user/user_home.jsp");
+				} else {
+					session.setAttribute("failMsg", "Invalid Email or Password");
+
+					response.sendRedirect("login.jsp");
+				}
 			}
-			
+
 			/*
 			 * out.println(email); out.print(pw);
 			 *
 			 */
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

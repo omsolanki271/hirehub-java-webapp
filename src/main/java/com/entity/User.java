@@ -1,71 +1,53 @@
 package com.entity;
 
 public class User {
-	private int id;
-	private String name;
-	private String email;
-	private String password;
-	private String qualification;
-	private String role;
 
-	public User(String name, String email, String password, String qualification, String role) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.qualification = qualification;
-		this.role = role;
-	}
+    private int id;
+    private String fullname;
+    private String email;
+    private String password;
+    private String qualification;
 
-	public User() {
-		super();
-	}
+    public User() {
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getFullname() {
+        return fullname;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getQualification() {
-		return qualification;
-	}
+    public String getQualification() {
+        return qualification;
+    }
 
-	public void setQualification(String qualification) {
-		this.qualification = qualification;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
 }

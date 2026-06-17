@@ -12,11 +12,10 @@
 	  	<description></description>
 	  	<servlet-class>com.servlet.AddPostServlet</servlet-class>
 	  </servlet>
-	
+	  	
 	  <servlet-mapping>
 	  	<servlet-name>AddPostServlet</servlet-name>
 	  	<url-pattern>/AddPostServlet</url-pattern>
 	  </servlet-mapping>
-	  
-	  
+	 
 </web-app>

@@ -24,7 +24,7 @@
 
 </head>
 <body>
-	<%@include file="all_component/navbar.jsp"%>
+	<%@include file="../all_component/navbar.jsp"%>
 
 	<div class="container-fluid back-img">
 		<div class="text-center">

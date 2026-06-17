@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Add Job - HireHub</title>
 
-<%@include file="all_component/all_css.jsp"%>
+<%@ include file="../all_component/all_css.jsp" %>
 
 <style>
 body {
@@ -35,10 +35,9 @@ textarea {
 
 </head>
 <body>
-
-	<%@include file="all_component/navbar.jsp"%>
+	<%@include file="../all_component/navbar.jsp"%>
 	<c:if test="${empty adminobj}">
-		<c:redirect url="login.jsp" />
+		<c:redirect url="../login.jsp" />
 	</c:if>
 	<div class="container add-job-container">
 

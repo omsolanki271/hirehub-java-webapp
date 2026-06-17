@@ -158,5 +158,90 @@ public class JobDao {
 		
 		return f;
 	}
+	
+		public int getTotalJobs()
+	{
+	int count = 0;
+
+	
+	try
+	{
+	    String sql = "select count(*) from jobs";
+
+	    PreparedStatement ps =
+	            conn.prepareStatement(sql);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    if(rs.next())
+	    {
+	        count = rs.getInt(1);
+	    }
+	}
+	catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+
+	return count;
+	
+
+	}
+
+	public int getTotalUsers()
+	{
+	int count = 0;
+
+
+	try
+	{
+	    String sql = "select count(*) from users";
+
+	    PreparedStatement ps =
+	            conn.prepareStatement(sql);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    if(rs.next())
+	    {
+	        count = rs.getInt(1);
+	    }
+	}
+	catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+
+	return count;
+
+
+	}
+
+	public int getTotalApplications()
+	{
+	int count = 0;
+
+	try
+	{
+	    String sql = "select count(*) from apply_job";
+
+	    PreparedStatement ps =
+	            conn.prepareStatement(sql);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    if(rs.next())
+	    {
+	        count = rs.getInt(1);
+	    }
+	}
+	catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+
+	return count;
+	}
+
 }
 

@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>View Jobs</title>
 
-<%@ include file="all_component/all_css.jsp"%>
+<%@ include file="../all_component/all_css.jsp"%>
 
 <style>
 body {
@@ -63,9 +63,9 @@ body {
 </head>
 <body>
 
-	<%@ include file="all_component/navbar.jsp"%>
+	<%@ include file="../all_component/navbar.jsp"%>
 <c:if test="${empty adminobj}">
-    <c:redirect url="login.jsp"/>
+    <c:redirect url="../login.jsp"/>
 </c:if>
 	<div class="container mt-4">
 
