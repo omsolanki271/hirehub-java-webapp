@@ -148,7 +148,7 @@
 									Search for vacancies, review requirements, salaries, and filter listings by location or type.
 								</p>
 							</div>
-							<a href="#" class="btn btn-primary-gradient btn-block py-2">
+							<a href="jobs.jsp" class="btn btn-primary-gradient btn-block py-2">
 								<i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Search Openings
 							</a>
 						</div>

@@ -208,7 +208,7 @@ if (admin != null) {
 					href="<%=request.getContextPath()%>/user/user_home.jsp"> <i
 						class="fa-solid fa-table-columns"></i> Dashboard
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"> <i
+				<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user/jobs.jsp"> <i
 						class="fa-solid fa-briefcase"></i> Jobs
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> <i
