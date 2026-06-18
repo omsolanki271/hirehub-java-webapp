@@ -103,6 +103,7 @@ public class UserDao {
 	            u.setFullname(rs.getString("fullname"));
 	            u.setEmail(rs.getString("email"));
 	            u.setQualification(rs.getString("qualification"));
+	            u.setRegDate(rs.getString("created_at"));
 
 	            list.add(u);
 	        }
@@ -113,6 +114,28 @@ public class UserDao {
 	    }
 
 	    return list;
+	}
+
+	public List<User> getRecentUsers() {
+		List<User> list = new ArrayList<User>();
+		User u = null;
+		try {
+			String sql = "select * from users order by id desc limit 5";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				u = new User();
+				u.setId(rs.getInt("id"));
+				u.setFullname(rs.getString("fullname"));
+				u.setEmail(rs.getString("email"));
+				u.setQualification(rs.getString("qualification"));
+				u.setRegDate(rs.getString("created_at"));
+				list.add(u);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	public boolean deleteUser(int id) {

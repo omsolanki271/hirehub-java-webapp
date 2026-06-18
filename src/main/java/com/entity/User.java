@@ -50,4 +50,14 @@ public class User {
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
+
+    private String regDate;
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
+    }
 }

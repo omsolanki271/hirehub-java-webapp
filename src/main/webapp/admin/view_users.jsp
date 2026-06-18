@@ -6,7 +6,13 @@
 <%@ page isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<!-- Authentication Guard -->
+<%
+if (session.getAttribute("adminobj") == null) {
+	response.sendRedirect(request.getContextPath() + "/login.jsp");
+	return;
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,12 +23,6 @@
 <%@include file="../all_component/all_css.jsp"%>
 </head>
 <body>
-
-	<!-- Authentication Guard -->
-	<c:if test="${empty adminobj}">
-		<c:redirect url="../login.jsp"/>
-	</c:if>
-
 	<%@include file="../all_component/navbar.jsp"%>
 
 	<div class="container my-5">

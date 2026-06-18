@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 
 			Admin admin = dao.login(email, pw);
 
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(true);
 			if (admin != null) 
 			{
 				session.setAttribute("adminobj", admin);

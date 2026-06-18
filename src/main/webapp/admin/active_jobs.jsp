@@ -1,5 +1,6 @@
 <%@page import="com.entity.Jobs"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.DB.DBConnect"%>
 <%@page import="com.dao.JobDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,13 +15,12 @@ if (session.getAttribute("adminobj") == null) {
 }
 %>
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=device-width, initial-scale=1.0">
-<title>All Jobs - HireHub</title>
+<title>Active Jobs - HireHub</title>
 
 <%@ include file="../all_component/all_css.jsp"%>
 </head>
@@ -33,9 +33,8 @@ if (session.getAttribute("adminobj") == null) {
 		<div
 			class="page-header d-flex flex-wrap justify-content-between align-items-center mb-4">
 			<div>
-				<h2>Manage Posted Jobs</h2>
-				<p>View, edit, and delete job postings currently active on the
-					platform.</p>
+				<h2>Manage Active Jobs</h2>
+				<p>Browse, update, or remove active job listings currently visible to candidates.</p>
 			</div>
 			<div>
 				<a href="add_job.jsp" class="btn btn-success-gradient"> <i
@@ -59,30 +58,39 @@ if (session.getAttribute("adminobj") == null) {
 		String searchLocation = request.getParameter("location");
 
 		JobDao dao = new JobDao(DBConnect.getConn());
-		List<Jobs> list;
+		List<Jobs> rawList;
 
 		boolean isSearch = (searchTitle != null || searchCategory != null || searchLocation != null);
 		if (isSearch) {
-			list = dao.getJobsBySearch(searchTitle, searchCategory, searchLocation);
+			rawList = dao.getJobsBySearch(searchTitle, searchCategory, searchLocation);
 		} else {
-			list = dao.getAlljobs();
+			rawList = dao.getActiveJobs();
+		}
+
+		// Filter for active status only
+		List<Jobs> list = new ArrayList<Jobs>();
+		if (rawList != null) {
+			for (Jobs j : rawList) {
+				if ("Active".equalsIgnoreCase(j.getStatus())) {
+					list.add(j);
+				}
+			}
 		}
 		%>
 
 		<!-- Search Filters Form Card -->
 		<div class="card form-card border-0 shadow-sm p-4 mb-5">
 			<h5 class="font-weight-bold mb-3" style="color: var(--dark-color);">
-				<i class="fa-solid fa-filter mr-2 text-primary"></i>Filter Job
-				Listings
+				<i class="fa-solid fa-filter mr-2 text-primary"></i>Filter Active Jobs
 			</h5>
-			<form action="view_jobs.jsp" method="get" class="needs-validation"
+			<form action="active_jobs.jsp" method="get" class="needs-validation"
 				novalidate>
 				<div class="form-row">
 					<!-- Title -->
 					<div class="form-group col-md-4 mb-3 mb-md-0">
 						<label class="form-label" style="font-size: 0.85rem;">Job
 							Title</label> <input type="text" name="title" class="form-control"
-							placeholder="Search by title..."
+							placeholder="Search active title..."
 							value="<%=(searchTitle != null) ? searchTitle : ""%>">
 					</div>
 					<!-- Category -->
@@ -130,7 +138,7 @@ if (session.getAttribute("adminobj") == null) {
 							<%
 							if (isSearch) {
 							%>
-							<a href="view_jobs.jsp"
+							<a href="active_jobs.jsp"
 								class="btn btn-light d-flex align-items-center justify-content-center"
 								style="height: 44px; width: 44px; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm);"
 								title="Clear Search"> <i
@@ -155,19 +163,12 @@ if (session.getAttribute("adminobj") == null) {
 				<div class="text-muted mb-3" style="font-size: 3rem;">
 					<i class="fa-solid fa-circle-question"></i>
 				</div>
-				<h5 class="text-muted font-weight-bold">No Jobs Found</h5>
-				<p class="text-muted mb-0">Try adjusting your search filters to
-					find what you are looking for.</p>
+				<h5 class="text-muted font-weight-bold">No Active Jobs Available</h5>
+				<p class="text-muted mb-0">Try adjusting your filters or post a new job with active status.</p>
 			</div>
 			<%
 			} else {
 			for (Jobs j : list) {
-				String statusClass = "badge-status-active";
-				String statusIcon = "fa-solid fa-circle-check";
-				if (!"Active".equalsIgnoreCase(j.getStatus())) {
-					statusClass = "badge-status-inactive";
-					statusIcon = "fa-solid fa-circle-xmark";
-				}
 			%>
 
 			<div class="col-lg-6 mb-4">
@@ -178,8 +179,8 @@ if (session.getAttribute("adminobj") == null) {
 						<div class="job-icon-container">
 							<i class="fa-solid fa-briefcase"></i>
 						</div>
-						<span class="job-meta-badge <%=statusClass%>"> <i
-							class="<%=statusIcon%>"></i> <%=j.getStatus()%>
+						<span class="job-meta-badge badge-status-active"> <i
+							class="fa-solid fa-circle-check"></i> <%=j.getStatus()%>
 						</span>
 					</div>
 
@@ -222,7 +223,7 @@ if (session.getAttribute("adminobj") == null) {
 								<i class="fa-solid fa-pen-to-square mr-1"></i> Edit
 							</a> <a href="<%=request.getContextPath()%>/delete?id=<%=j.getId()%>"
 								class="btn btn-outline-danger btn-action-sm"
-								onclick="return confirm('Are you sure you want to delete this job listing?')">
+								onclick="return confirm('Are you sure you want to delete this active job listing?')">
 								<i class="fa-solid fa-trash-can mr-1"></i> Delete
 							</a>
 						</div>

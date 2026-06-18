@@ -269,5 +269,77 @@ public class JobDao {
 		}
 		return list;
 	}
+
+	public List<Jobs> getActiveJobs() {
+		List<Jobs> list = new ArrayList<Jobs>();
+		Jobs j = null;
+		try {
+			String sql = "select * from jobs where status = 'Active' order by id desc";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				j = new Jobs();
+				j.setId(rs.getInt("id"));
+				j.setTitle(rs.getString("title"));
+				j.setDescription(rs.getString("description"));
+				j.setCategory(rs.getString("category"));
+				j.setStatus(rs.getString("status"));
+				j.setLocation(rs.getString("location"));
+				j.setPdate(rs.getString("pdate"));
+				list.add(j);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public List<Jobs> getInactiveJobs() {
+		List<Jobs> list = new ArrayList<Jobs>();
+		Jobs j = null;
+		try {
+			String sql = "select * from jobs where status = 'Inactive' order by id desc";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				j = new Jobs();
+				j.setId(rs.getInt("id"));
+				j.setTitle(rs.getString("title"));
+				j.setDescription(rs.getString("description"));
+				j.setCategory(rs.getString("category"));
+				j.setStatus(rs.getString("status"));
+				j.setLocation(rs.getString("location"));
+				j.setPdate(rs.getString("pdate"));
+				list.add(j);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public List<Jobs> getRecentJobs() {
+		List<Jobs> list = new ArrayList<Jobs>();
+		Jobs j = null;
+		try {
+			String sql = "select * from jobs order by id desc limit 5";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				j = new Jobs();
+				j.setId(rs.getInt("id"));
+				j.setTitle(rs.getString("title"));
+				j.setDescription(rs.getString("description"));
+				j.setCategory(rs.getString("category"));
+				j.setStatus(rs.getString("status"));
+				j.setLocation(rs.getString("location"));
+				j.setPdate(rs.getString("pdate"));
+				list.add(j);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
 
