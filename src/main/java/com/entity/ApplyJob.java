@@ -12,6 +12,10 @@ public class ApplyJob {
 	private String userQualification;
 	private String jobTitle;
 
+	private String jobCategory;
+	private String jobLocation;
+	private String jobStatus;
+
 	public ApplyJob() {
 		super();
 	}
@@ -78,5 +82,29 @@ public class ApplyJob {
 
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
+	}
+
+	public String getJobCategory() {
+		return jobCategory;
+	}
+
+	public void setJobCategory(String jobCategory) {
+		this.jobCategory = jobCategory;
+	}
+
+	public String getJobLocation() {
+		return jobLocation;
+	}
+
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
+	}
+
+	public String getJobStatus() {
+		return jobStatus;
+	}
+
+	public void setJobStatus(String jobStatus) {
+		this.jobStatus = jobStatus;
 	}
 }

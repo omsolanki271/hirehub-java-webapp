@@ -1,8 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.entity.User"%>
+<%@ page import="com.dao.JobDao"%>
+<%@ page import="com.dao.ApplyJobDao"%>
+<%@ page import="com.DB.DBConnect"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+
+<!-- Authentication Guard -->
+<c:if test="${empty userobj}">
+	<c:redirect url="../login.jsp" />
+</c:if>
+
+<%
+JobDao jobDao = new JobDao(DBConnect.getConn());
+int activeJobsCount = jobDao.getActiveJobs().size();
+
+ApplyJobDao applyDao = new ApplyJobDao(DBConnect.getConn());
+User userObjObj = (User) session.getAttribute("userobj");
+int userApplicationsCount = 0;
+if (userObjObj != null) {
+	userApplicationsCount = applyDao.getApplicationsByUser(userObjObj.getId()).size();
+}
+%>
+
 
 <!DOCTYPE html>
 <html>
@@ -76,11 +97,6 @@
 </head>
 <body>
 
-	<!-- Authentication Guard -->
-	<c:if test="${empty userobj}">
-		<c:redirect url="../login.jsp" />
-	</c:if>
-
 	<%@ include file="../all_component/navbar.jsp"%>
 
 	<div class="container my-5">
@@ -144,9 +160,12 @@
 									<i class="fa-solid fa-briefcase"></i>
 								</div>
 								<h4 class="font-weight-bold text-dark mb-2">Browse Jobs</h4>
-								<p class="text-muted mb-4" style="font-size: 0.92rem; line-height: 1.5;">
+								<p class="text-muted mb-2" style="font-size: 0.92rem; line-height: 1.5;">
 									Search for vacancies, review requirements, salaries, and filter listings by location or type.
 								</p>
+								<div class="mb-4">
+									<span class="badge badge-info py-2 px-3 font-weight-bold" style="font-size: 0.82rem; border-radius: var(--radius-sm);">Available Jobs : <%=activeJobsCount%></span>
+								</div>
 							</div>
 							<a href="jobs.jsp" class="btn btn-primary-gradient btn-block py-2">
 								<i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Search Openings
@@ -162,11 +181,14 @@
 									<i class="fa-solid fa-file-invoice"></i>
 								</div>
 								<h4 class="font-weight-bold text-dark mb-2">My Applications</h4>
-								<p class="text-muted mb-4" style="font-size: 0.92rem; line-height: 1.5;">
+								<p class="text-muted mb-2" style="font-size: 0.92rem; line-height: 1.5;">
 									Track the response status of jobs you have submitted resumes to and inspect your timeline.
 								</p>
+								<div class="mb-4">
+									<span class="badge badge-success py-2 px-3 font-weight-bold" style="font-size: 0.82rem; border-radius: var(--radius-sm);">My Applications : <%=userApplicationsCount%></span>
+								</div>
 							</div>
-							<a href="#" class="btn btn-success-gradient btn-block py-2">
+							<a href="my_applications.jsp" class="btn btn-success-gradient btn-block py-2">
 								<i class="fa-solid fa-list-check mr-1"></i> Check Submissions
 							</a>
 						</div>

@@ -154,4 +154,62 @@ public class UserDao {
 		return f;
 	}
 
+	public User getUserById(int id) {
+		User u = null;
+		try {
+			String sql = "select * from users where id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				u = new User();
+				u.setId(rs.getInt("id"));
+				u.setFullname(rs.getString("fullname"));
+				u.setEmail(rs.getString("email"));
+				u.setPassword(rs.getString("pass"));
+				u.setQualification(rs.getString("qualification"));
+				u.setRegDate(rs.getString("created_at"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+
+	public boolean updateProfile(User u) {
+		boolean f = false;
+		try {
+			String sql = "update users set fullname = ?, qualification = ? where id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, u.getFullname());
+			ps.setString(2, u.getQualification());
+			ps.setInt(3, u.getId());
+			int i = ps.executeUpdate();
+			if (i > 0) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
+
+	public boolean changePassword(int id, String currentPassword, String newPassword) {
+		boolean f = false;
+		try {
+			String sql = "update users set pass = ? where id = ? and pass = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, newPassword);
+			ps.setInt(2, id);
+			ps.setString(3, currentPassword);
+			int i = ps.executeUpdate();
+			if (i > 0) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
+
 }

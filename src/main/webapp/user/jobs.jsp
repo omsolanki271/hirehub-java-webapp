@@ -7,10 +7,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+
 <!-- Authentication Guard -->
-<c:if test="${empty userobj}">
-	<c:redirect url="../login.jsp" />
-</c:if>
+<%
+if (session.getAttribute("userobj") == null) {
+	response.sendRedirect(request.getContextPath() + "/login.jsp");
+	return;
+}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,7 +124,7 @@
 								Published Date: <%= j.getPdate() %>
 							</p>
 							<div class="text-right">
-								<a href="<%= request.getContextPath() %>/one_view.jsp?id=<%= j.getId() %>" class="btn btn-outline-primary btn-sm">
+								<a href="job_details.jsp?id=<%= j.getId() %>" class="btn btn-outline-primary btn-sm">
 									<i class="fa-solid fa-circle-info mr-1"></i> View Details
 								</a>
 							</div>

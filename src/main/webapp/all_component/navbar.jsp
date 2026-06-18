@@ -211,7 +211,7 @@ if (admin != null) {
 				<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user/jobs.jsp"> <i
 						class="fa-solid fa-briefcase"></i> Jobs
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"> <i
+				<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user/my_applications.jsp"> <i
 						class="fa-solid fa-file-invoice"></i> My Applications
 				</a></li>
 				<%
@@ -247,10 +247,10 @@ if (admin != null) {
 				<%
 				} else {
 				%>
-				<span
-					class="navbar-text mr-3 text-white-50 font-weight-bold d-none d-lg-inline">
+				<a href="<%=request.getContextPath()%>/user/profile.jsp"
+					class="navbar-text mr-3 text-white font-weight-bold d-none d-lg-inline text-decoration-none" style="transition: var(--transition); opacity: 0.85;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
 					<i class="fa-solid fa-circle-user mr-1 text-success"></i> <%=user.getFullname()%>
-				</span> <a href="<%=request.getContextPath()%>/logout"
+				</a> <a href="<%=request.getContextPath()%>/logout"
 					class="btn btn-danger-gradient btn-action-sm"> <i
 					class="fa-solid fa-power-off mr-1"></i> Logout
 				</a>
