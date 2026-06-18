@@ -45,4 +45,22 @@ public class AdminDao {
 
 	        return admin;
 	    }
+
+	    public boolean changePassword(int id, String currentPassword, String newPassword) {
+	        boolean f = false;
+	        try {
+	            String sql = "update admin set password=? where id=? and password=?";
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            ps.setString(1, newPassword);
+	            ps.setInt(2, id);
+	            ps.setString(3, currentPassword);
+	            int i = ps.executeUpdate();
+	            if (i == 1) {
+	                f = true;
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return f;
+	    }
 }

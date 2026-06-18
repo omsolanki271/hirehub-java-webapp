@@ -46,12 +46,12 @@ public class Updatejob extends HttpServlet {
 		if(jobs)
 		{
 			session.setAttribute("sucMsg", "Job Post update sucessfully..");
-			response.sendRedirect("view_jobs.jsp");
+			response.sendRedirect("admin/view_jobs.jsp");
 		}
 		else
 		{
 			session.setAttribute("sucMsg", "Something Wrong on server..");
-			response.sendRedirect("view_jobs.jsp");
+			response.sendRedirect("admin/view_jobs.jsp");
 		}
 		
 	}

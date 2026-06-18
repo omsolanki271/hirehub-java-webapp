@@ -121,14 +121,14 @@ body {
 .navbar-custom .nav-link {
   color: rgba(241, 245, 249, 0.8) !important;
   font-weight: 500;
-  font-size: 0.95rem;
-  padding: 8px 16px !important;
-  margin: 0 4px;
+  font-size: 0.88rem;
+  padding: 8px 10px !important;
+  margin: 0 2px;
   border-radius: var(--radius-sm);
   transition: var(--transition);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .navbar-custom .nav-link i {
@@ -180,6 +180,7 @@ body {
   color: var(--white) !important;
   border-radius: var(--radius-sm) 0 0 var(--radius-sm) !important;
   height: 38px;
+  width: 140px !important;
   padding-left: 15px;
   font-size: 0.9rem;
   transition: var(--transition);
@@ -212,6 +213,10 @@ body {
 .nav-search-btn:hover {
   background: rgba(255, 255, 255, 0.18) !important;
   color: var(--white) !important;
+}
+
+.navbar-custom .input-group {
+  flex-wrap: nowrap !important;
 }
 
 /* Hero Section */
@@ -594,5 +599,160 @@ textarea.form-control {
   color: var(--text-muted);
   font-size: 0.98rem;
   margin-bottom: 0;
+}
+
+/* ==========================================
+   ADMIN LAYOUT REDESIGN CLASSES
+   ========================================== */
+
+/* Fixed Admin Left Sidebar */
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  background-color: #1e293b !important; /* Slate 800 */
+  z-index: 1040;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar-brand {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0f172a; /* Slate 900 */
+  color: var(--white) !important;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+  gap: 10px;
+  text-decoration: none !important;
+}
+
+.admin-sidebar-brand img {
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-sidebar-menu {
+  padding: 20px 0;
+  list-style: none;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.admin-menu-item a {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  color: #94a3b8 !important; /* Slate 400 */
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+  gap: 12px;
+}
+
+.admin-menu-item a i {
+  font-size: 1.05rem;
+  width: 20px;
+  text-align: center;
+}
+
+.admin-menu-item a:hover {
+  color: #f8fafc !important; /* Slate 50 */
+  background-color: rgba(255, 255, 255, 0.03);
+  border-left-color: rgba(255, 255, 255, 0.15);
+}
+
+.admin-menu-item.active a {
+  color: #3b82f6 !important; /* Accent Blue */
+  background-color: rgba(59, 130, 246, 0.08);
+  border-left-color: #3b82f6 !important;
+}
+
+/* Fixed Admin Top Utility Navbar */
+.admin-top-navbar {
+  position: fixed;
+  top: 0;
+  left: 260px;
+  right: 0;
+  height: 70px;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 1030;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+}
+
+.admin-top-brand {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--dark-color);
+  letter-spacing: -0.3px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-profile-email {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  background-color: var(--light-bg);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Sidebar Toggle Utilities for Mobile */
+.admin-toggle-btn {
+  border: none;
+  background: transparent;
+  color: var(--dark-color);
+  font-size: 1.2rem;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.admin-toggle-btn:hover {
+  background-color: var(--light-bg);
+}
+
+/* Sidebar Responsive Breakpoints */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    left: -260px;
+  }
+  .admin-sidebar.show {
+    left: 0;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+  .admin-top-navbar {
+    left: 0;
+  }
 }
 </style>

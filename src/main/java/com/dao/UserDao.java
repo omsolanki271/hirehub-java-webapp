@@ -115,4 +115,20 @@ public class UserDao {
 	    return list;
 	}
 
+	public boolean deleteUser(int id) {
+		boolean f = false;
+		try {
+			String sql = "delete from users where id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			int i = ps.executeUpdate();
+			if (i > 0) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
+
 }

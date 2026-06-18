@@ -13,7 +13,7 @@ import com.dao.JobDao;
 import com.entity.Jobs;
 import com.mysql.cj.Session;
 
-//@WebServlet("/AddPostServlet")
+@WebServlet("/AddPostServlet")
 public class AddPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,12 +46,12 @@ public class AddPostServlet extends HttpServlet {
 		if(jobs)
 		{
 			httpSession.setAttribute("sucMsg", "Job Post sucessfully..");
-			response.sendRedirect("add_job.jsp");
+			response.sendRedirect("admin/add_job.jsp");
 		}
 		else
 		{
 			httpSession.setAttribute("sucMsg", "Something Wrong on server..");
-			response.sendRedirect("add_job.jsp");
+			response.sendRedirect("admin/add_job.jsp");
 		}
 	}
 

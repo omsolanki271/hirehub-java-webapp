@@ -6,8 +6,135 @@
 <%
 Admin admin = (Admin) session.getAttribute("adminobj");
 User user = (User) session.getAttribute("userobj");
+
+String currentUri = request.getRequestURI();
+String pageTitle = "HireHub Admin Panel";
+String activeTab = "";
+
+if (currentUri.endsWith("admin.jsp")) {
+    pageTitle = "Admin Dashboard";
+    activeTab = "dashboard";
+} else if (currentUri.endsWith("add_job.jsp")) {
+    pageTitle = "Post a New Job";
+    activeTab = "add_job";
+} else if (currentUri.endsWith("view_jobs.jsp") || currentUri.endsWith("edit_job.jsp")) {
+    pageTitle = "Manage Jobs";
+    activeTab = "view_jobs";
+} else if (currentUri.endsWith("view_users.jsp")) {
+    pageTitle = "Registered Users";
+    activeTab = "view_users";
+} else if (currentUri.endsWith("view_applicants.jsp")) {
+    pageTitle = "Job Applications";
+    activeTab = "view_applicants";
+} else if (currentUri.endsWith("admin_profile.jsp")) {
+    pageTitle = "Admin Profile";
+    activeTab = "admin_profile";
+}
 %>
 
+<%
+if (admin != null) {
+%>
+<style>
+@media (min-width: 992px) {
+  body {
+    padding-left: 260px !important;
+    padding-top: 90px !important;
+  }
+}
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 90px !important;
+  }
+}
+</style>
+
+<div class="admin-sidebar">
+    <a class="admin-sidebar-brand" href="<%=request.getContextPath()%>/admin/admin.jsp">
+        <img src="<%=request.getContextPath()%>/img/Hire Hub.jpeg" width="35" height="35" class="rounded-circle">
+        <span>HireHub Admin</span>
+    </a>
+    <ul class="admin-sidebar-menu">
+        <li class="admin-menu-item <%= "dashboard".equals(activeTab) ? "active" : "" %>">
+            <a href="<%=request.getContextPath()%>/admin/admin.jsp">
+                <i class="fa-solid fa-gauge"></i> Dashboard
+            </a>
+        </li>
+        <li class="admin-menu-item <%= "add_job".equals(activeTab) ? "active" : "" %>">
+            <a href="<%=request.getContextPath()%>/admin/add_job.jsp">
+                <i class="fa-solid fa-plus-circle"></i> Post Job
+            </a>
+        </li>
+        <li class="admin-menu-item <%= "view_jobs".equals(activeTab) ? "active" : "" %>">
+            <a href="<%=request.getContextPath()%>/admin/view_jobs.jsp">
+                <i class="fa-solid fa-list-check"></i> View Jobs
+            </a>
+        </li>
+        <li class="admin-menu-item <%= "view_users".equals(activeTab) ? "active" : "" %>">
+            <a href="<%=request.getContextPath()%>/admin/view_users.jsp">
+                <i class="fa-solid fa-users-gear"></i> View Users
+            </a>
+        </li>
+        <li class="admin-menu-item <%= "view_applicants".equals(activeTab) ? "active" : "" %>">
+            <a href="<%=request.getContextPath()%>/admin/view_applicants.jsp">
+                <i class="fa-solid fa-file-invoice"></i> View Applicants
+            </a>
+        </li>
+        <li class="admin-menu-item <%= "admin_profile".equals(activeTab) ? "active" : "" %>">
+            <a href="<%=request.getContextPath()%>/admin/admin_profile.jsp">
+                <i class="fa-solid fa-circle-user"></i> Admin Profile
+            </a>
+        </li>
+        <li class="admin-menu-item mt-4">
+            <a href="<%=request.getContextPath()%>/logout" class="text-danger">
+                <i class="fa-solid fa-power-off text-danger"></i> Logout
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="admin-top-navbar">
+    <div class="d-flex align-items-center">
+        <button class="admin-toggle-btn mr-3 d-lg-none" id="adminSidebarToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <h5 class="admin-top-brand mb-0">
+            <i class="fa-solid fa-shield-halved text-primary mr-2"></i>
+            <%= pageTitle %>
+        </h5>
+    </div>
+    
+    <div class="admin-profile-info">
+        <!-- Notification Icon (UI only) -->
+        <div class="position-relative cursor-pointer mr-3 text-muted" style="font-size: 1.15rem;">
+            <i class="fa-regular fa-bell"></i>
+            <span class="position-absolute badge badge-danger rounded-circle" style="top: -5px; right: -5px; font-size: 0.6rem; padding: 3px 5px;">3</span>
+        </div>
+        <!-- Admin Profile Email -->
+        <div class="admin-profile-email">
+            <i class="fa-solid fa-circle-user text-success"></i>
+            <span><%= admin.getEmail() %></span>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#adminSidebarToggle').on('click', function(e) {
+    e.stopPropagation();
+    $('.admin-sidebar').toggleClass('show');
+  });
+
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('.admin-sidebar').length && !$(e.target).closest('#adminSidebarToggle').length) {
+      $('.admin-sidebar').removeClass('show');
+    }
+  });
+});
+</script>
+<%
+} else {
+%>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm fixed-top">
 	<div class="container">
 		<a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">
@@ -25,33 +152,11 @@ User user = (User) session.getAttribute("userobj");
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
+				<%-- <li class="nav-item">
 					<a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">
 						<i class="fa-solid fa-house"></i> Home
 					</a>
-				</li>
-
-				<%
-				if (admin != null) {
-				%>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath()%>/admin/add_job.jsp">
-						<i class="fa-solid fa-plus-circle"></i> Post Job
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath()%>/admin/view_jobs.jsp">
-						<i class="fa-solid fa-list-check"></i> View Jobs
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath()%>/admin/view_users.jsp">
-						<i class="fa-solid fa-users-gear"></i> View Users
-					</a>
-				</li>
-				<%
-				}
-				%>
+				</li> --%>
 
 				<%
 				if (user != null) {
@@ -91,7 +196,7 @@ User user = (User) session.getAttribute("userobj");
 			<!-- Authentication Buttons -->
 			<div class="d-flex align-items-center gap-2">
 				<%
-				if (admin == null && user == null) {
+				if (user == null) {
 				%>
 				<a href="<%=request.getContextPath()%>/login.jsp" class="nav-link navbar-btn-login mr-2">
 					<i class="fa-solid fa-right-to-bracket"></i> Login
@@ -104,7 +209,7 @@ User user = (User) session.getAttribute("userobj");
 				%>
 				<span class="navbar-text mr-3 text-white-50 font-weight-bold d-none d-lg-inline">
 					<i class="fa-solid fa-circle-user mr-1 text-success"></i>
-					<%= (admin != null) ? "Admin Panel" : user.getFullname() %>
+					<%= user.getFullname() %>
 				</span>
 				<a href="<%=request.getContextPath()%>/logout" class="btn btn-danger-gradient btn-action-sm">
 					<i class="fa-solid fa-power-off mr-1"></i> Logout
@@ -116,3 +221,6 @@ User user = (User) session.getAttribute("userobj");
 		</div>
 	</div>
 </nav>
+<%
+}
+%>

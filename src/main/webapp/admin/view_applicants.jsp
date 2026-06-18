@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="com.entity.User"%>
-<%@page import="com.dao.UserDao"%>
+<%@page import="com.entity.ApplyJob"%>
+<%@page import="com.dao.ApplyJobDao"%>
 <%@page import="com.DB.DBConnect"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
@@ -12,16 +12,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=device-width, initial-scale=1.0">
-<title>Registered Users - HireHub</title>
+<title>Job Applicants - HireHub</title>
 
 <%@include file="../all_component/all_css.jsp"%>
 </head>
 <body>
 
 	<!-- Authentication Guard -->
-	<c:if test="${empty adminobj}">
+	<%-- <c:if test="${empty adminobj}">
 		<c:redirect url="../login.jsp"/>
-	</c:if>
+	</c:if> --%>
 
 	<%@include file="../all_component/navbar.jsp"%>
 
@@ -31,8 +31,8 @@
 		<div class="row align-items-center mb-4">
 			<div class="col-md-7 mb-3 mb-md-0">
 				<div class="page-header mb-0">
-					<h2>All Registered Users</h2>
-					<p>Browse qualification profiles, login handles, and registration details for all candidates.</p>
+					<h2>Job Applications</h2>
+					<p>Monitor and review submissions received from candidates for active job openings.</p>
 				</div>
 			</div>
 			
@@ -45,91 +45,74 @@
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</span>
 					</div>
-					<input type="text" id="userInputSearch" class="form-control border-left-0" 
+					<input type="text" id="applicantInputSearch" class="form-control border-left-0" 
 						style="border: 1.5px solid var(--border-color); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; height: 44px;" 
-						placeholder="Search users by name, qualification, email...">
+						placeholder="Search applicants, qualifications, job titles...">
 				</div>
 			</div>
 		</div>
 
-		<!-- Notifications -->
-		<c:if test="${not empty sucMsg}">
-			<div class="alert alert-custom alert-custom-success mb-4" role="alert">
-				<i class="fa-solid fa-circle-check"></i>
-				<span>${sucMsg}</span>
-			</div>
-			<c:remove var="sucMsg" />
-		</c:if>
-
-		<c:if test="${not empty failMsg}">
-			<div class="alert alert-custom alert-custom-danger mb-4" role="alert">
-				<i class="fa-solid fa-circle-exclamation"></i>
-				<span>${failMsg}</span>
-			</div>
-			<c:remove var="failMsg" />
-		</c:if>
-
-		<!-- Users Table Responsive Card -->
+		<!-- Applicants Table Responsive Card -->
 		<div class="table-responsive-custom">
-			<table class="table table-custom text-left" id="usersTable">
+			<table class="table table-custom text-left" id="applicantsTable">
 				<thead>
 					<tr>
-						<th width="8%">User ID</th>
-						<th width="27%">Full Name</th>
-						<th width="25%">Email Address</th>
-						<th width="22%">Qualification</th>
-						<th width="18%">Action</th>
+						<th width="8%">App ID</th>
+						<th width="22%">Applicant Name</th>
+						<th width="22%">Email Address</th>
+						<th width="15%">Qualification</th>
+						<th width="20%">Applied For</th>
+						<th width="13%">Apply Date</th>
 					</tr>
 				</thead>
 				<tbody>
 				<%
-				UserDao dao = new UserDao(DBConnect.getConn());
-				List<User> list = dao.getAllUsers();
+				ApplyJobDao dao = new ApplyJobDao(DBConnect.getConn());
+				List<ApplyJob> list = dao.getAllApplicants();
 
 				if (list == null || list.isEmpty()) {
 				%>
 					<tr>
-						<td colspan="5" class="text-center py-5 text-muted">
-							<i class="fa-solid fa-users-slash fa-3x mb-3 text-muted"></i>
-							<h5>No registered users found</h5>
+						<td colspan="6" class="text-center py-5 text-muted">
+							<i class="fa-solid fa-folder-open fa-3x mb-3 text-muted"></i>
+							<h5>No applications received yet</h5>
 						</td>
 					</tr>
 				<%
 				} else {
-					for (User u : list) {
+					for (ApplyJob aj : list) {
 				%>
 					<tr>
 						<td>
-							<span class="font-weight-bold" style="color: var(--text-muted); font-size: 0.88rem;">#<%=u.getId()%></span>
+							<span class="font-weight-bold" style="color: var(--text-muted); font-size: 0.88rem;">#<%=aj.getId()%></span>
 						</td>
 						<td>
 							<div class="d-flex align-items-center">
-								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center text-primary mr-3" 
+								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center text-indigo mr-3" 
 									style="width: 38px; height: 38px; font-weight: 700; background-color: rgba(79, 70, 229, 0.06) !important;">
-									<%= u.getFullname() != null && !u.getFullname().isEmpty() ? u.getFullname().substring(0,1).toUpperCase() : "U" %>
+									<%= aj.getUserName() != null && !aj.getUserName().isEmpty() ? aj.getUserName().substring(0,1).toUpperCase() : "A" %>
 								</div>
 								<div>
-									<span class="font-weight-bold text-dark d-block mb-0" style="font-size: 0.95rem;"><%=u.getFullname()%></span>
+									<span class="font-weight-bold text-dark d-block mb-0" style="font-size: 0.95rem;"><%=aj.getUserName()%></span>
 								</div>
 							</div>
 						</td>
 						<td>
-							<a href="mailto:<%=u.getEmail()%>" class="text-decoration-none d-inline-flex align-items-center" style="color: var(--primary-color);">
+							<a href="mailto:<%=aj.getUserEmail()%>" class="text-decoration-none d-inline-flex align-items-center" style="color: var(--primary-color);">
 								<i class="fa-solid fa-envelope mr-2 text-muted" style="font-size: 0.88rem;"></i>
-								<span><%=u.getEmail()%></span>
+								<span><%=aj.getUserEmail()%></span>
 							</a>
 						</td>
 						<td>
 							<span class="badge badge-pill badge-category py-2 px-3 m-0" style="font-size: 0.8rem;">
-								<i class="fa-solid fa-graduation-cap mr-1"></i> <%=u.getQualification()%>
+								<i class="fa-solid fa-graduation-cap mr-1"></i> <%=aj.getUserQualification()%>
 							</span>
 						</td>
 						<td>
-							<a href="../deleteUser?id=<%=u.getId()%>" 
-								class="btn btn-outline-danger btn-action-sm" 
-								onclick="return confirm('Are you sure you want to delete this user candidate profile?')">
-								<i class="fa-solid fa-trash-can mr-1"></i> Delete
-							</a>
+							<span class="font-weight-bold text-dark" style="font-size: 0.92rem;"><%=aj.getJobTitle()%></span>
+						</td>
+						<td>
+							<span class="text-muted" style="font-size: 0.85rem;"><%=aj.getApplyDate() != null ? aj.getApplyDate().split(" ")[0] : ""%></span>
 						</td>
 					</tr>
 				<%
@@ -146,19 +129,20 @@
 
 	<!-- Instant Row Filtering Logic -->
 	<script>
-		document.getElementById('userInputSearch').addEventListener('keyup', function() {
+		document.getElementById('applicantInputSearch').addEventListener('keyup', function() {
 			var filter = this.value.toLowerCase();
-			var rows = document.querySelectorAll('#usersTable tbody tr');
+			var rows = document.querySelectorAll('#applicantsTable tbody tr');
 			
 			rows.forEach(function(row) {
 				// Skip if empty record row
-				if (row.cells.length < 5) return;
+				if (row.cells.length < 6) return;
 				
 				var name = row.cells[1].textContent.toLowerCase();
 				var email = row.cells[2].textContent.toLowerCase();
 				var qualification = row.cells[3].textContent.toLowerCase();
+				var jobTitle = row.cells[4].textContent.toLowerCase();
 				
-				if (name.indexOf(filter) > -1 || email.indexOf(filter) > -1 || qualification.indexOf(filter) > -1) {
+				if (name.indexOf(filter) > -1 || email.indexOf(filter) > -1 || qualification.indexOf(filter) > -1 || jobTitle.indexOf(filter) > -1) {
 					row.style.display = "";
 				} else {
 					row.style.display = "none";

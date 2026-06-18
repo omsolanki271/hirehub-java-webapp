@@ -25,9 +25,9 @@ int totalApplications = dao.getTotalApplications();
 <body>
 
 	<!-- Authentication Guard -->
-	<c:if test="${empty adminobj}">
+	<%-- <c:if test="${empty adminobj}">
 		<c:redirect url="../login.jsp"/>
-	</c:if>
+	</c:if> --%>
 
 	<%@include file="../all_component/navbar.jsp"%>
 

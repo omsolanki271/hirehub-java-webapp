@@ -14,9 +14,9 @@
 <body>
 	
 	<!-- Authentication Guard -->
-	<c:if test="${empty adminobj}">
+	<%-- <c:if test="${empty adminobj}">
 		<c:redirect url="../login.jsp" />
-	</c:if>
+	</c:if> --%>
 
 	<%@include file="../all_component/navbar.jsp"%>
 
@@ -42,7 +42,7 @@
 						<c:remove var="sucMsg" />
 					</c:if>
 
-					<form action="AddPostServlet" method="post" class="needs-validation" novalidate>
+					<form action="<%=request.getContextPath()%>/AddPostServlet" method="post" class="needs-validation" novalidate>
 						
 						<!-- Job Title -->
 						<div class="form-group mb-4">

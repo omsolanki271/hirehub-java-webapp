@@ -242,7 +242,32 @@ public class JobDao {
 
 	return count;
 	}
-	
-	
+
+	public List<Jobs> getJobsBySearch(String title, String category, String location) {
+		List<Jobs> list = new ArrayList<Jobs>();
+		Jobs j = null;
+		try {
+			String sql = "select * from jobs where title like ? and category like ? and location like ? order by id desc";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "%" + (title == null ? "" : title) + "%");
+			ps.setString(2, "%" + (category == null ? "" : category) + "%");
+			ps.setString(3, "%" + (location == null ? "" : location) + "%");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				j = new Jobs();
+				j.setId(rs.getInt("id"));
+				j.setTitle(rs.getString("title"));
+				j.setDescription(rs.getString("description"));
+				j.setCategory(rs.getString("category"));
+				j.setStatus(rs.getString("status"));
+				j.setLocation(rs.getString("location"));
+				j.setPdate(rs.getString("pdate"));
+				list.add(j);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
 

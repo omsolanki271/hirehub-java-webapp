@@ -17,9 +17,9 @@
 <body>
 
 	<!-- Authentication Guard -->
-	<c:if test="${empty adminobj}">
+	<%-- <c:if test="${empty adminobj}">
 		<c:redirect url="../login.jsp"/>
-	</c:if>
+	</c:if> --%>
 
 	<%@include file="../all_component/navbar.jsp"%>
 
@@ -51,7 +51,7 @@
 						<c:remove var="sucMsg" />
 					</c:if>
 
-					<form action="Updatejob" method="post" class="needs-validation" novalidate>
+					<form action="<%=request.getContextPath()%>/Updatejob" method="post" class="needs-validation" novalidate>
 						<input type="hidden" name="id" value="<%=j.getId()%>">
 						
 						<!-- Job Title -->
